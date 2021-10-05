@@ -20,19 +20,5 @@ public class webMobileTests extends BaseTest {
     @Test(groups = {"web"}, description = "Make sure that we've opened IANA homepage")
     public void simpleWebTest()
         throws InterruptedException, NoSuchFieldException, IllegalAccessException, InstantiationException {
-        getDriver().get(SEARCH_PAGE[0]);
 
-        new WebDriverWait(getDriver(), 30).until(
-                wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete")
-        );
-
-        assertEquals(((WebDriver) getDriver()).getTitle().toLowerCase(Locale.ROOT),
-            SEARCH_PAGE[1].toLowerCase(Locale.ROOT), String.format("Not a %s page", SEARCH_PAGE[0]));
-
-        /* TODO: NPE... something is wrong with the initialization
-        getPo().getWelement("search").sendKeys("epam", Keys.ENTER);
-        assertTrue(getPo().getWelement("expectedResult").isDisplayed());*/
-        crutchForSearchField(getDriver()).sendKeys("epam", Keys.ENTER);
-        assertTrue(crutchForExpectedSearchResult(getDriver()).isDisplayed(), "No one relevant result");
-    }
 }
